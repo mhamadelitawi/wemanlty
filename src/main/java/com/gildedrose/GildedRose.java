@@ -12,26 +12,36 @@ class GildedRose {
 
 
 
-
-
-            if (item.name.equals("Aged Brie") || item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-
+            if(item.name.equals("Aged Brie"))
+            {
                 increaseItemQuality(item);
-                if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            }
+            else
+            {
+
+                if(item.name.equals("Backstage passes to a TAFKAL80ETC concert"))
+                {
+                    increaseItemQuality(item);
                     if (item.sellIn < 11)
                         increaseItemQuality(item);
                     if (item.sellIn < 6)
                         increaseItemQuality(item);
                 }
+                else
+                {
+                    decreaseItemQuality(item);
+
+                }
+
 
             }
 
-            else
-                decreaseItemQuality(item);
 
 
 
-                decreaseSellIn( item);
+            decreaseSellIn( item);
+
+
 
 
             if (item.sellIn < 0) {
@@ -44,10 +54,11 @@ class GildedRose {
                      else
                         decreaseItemQuality(item);
                 }
-
             }
         }
     }
+
+
 
     public Boolean checkIfSulfuras(Item item)
     {
