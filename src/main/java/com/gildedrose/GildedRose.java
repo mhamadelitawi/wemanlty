@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Locale;
+
 class GildedRose {
     Item[] items;
 
@@ -7,38 +9,64 @@ class GildedRose {
         this.items = items;
     }
 
+
+    public static NormalItem convertToNormalItem(Item item)
+    {
+        if(item.name.toLowerCase().contains("sulfuras"))
+            return new Sulfuras(item.name, item.sellIn, item.quality);
+
+        if(item.name.toLowerCase().contains("aged brie"))
+            return new AgedBrie(item.name, item.sellIn, item.quality);
+
+        if(item.name.toLowerCase().contains("backstage passes"))
+            return new BackStagePasses(item.name, item.sellIn, item.quality);
+
+        return new NormalItem(item.name, item.sellIn, item.quality);
+    }
+
+    public void updateItemByNormalItem(Item item ,  NormalItem normalItem)
+    {
+        item.quality = normalItem.quality;
+        item.sellIn = normalItem.sellIn;
+    }
+
     public void updateQuality() {
         for (Item item : items) {
 
-            if(item.name.equals("Sulfuras, Hand of Ragnaros"))
-                continue;
+            NormalItem normalItem = GildedRose.convertToNormalItem(item);
+            normalItem.updateQuality();
+            updateItemByNormalItem(item ,  normalItem   );
 
-            if (item.name.equals("Aged Brie")) {
-                increaseItemQuality(item);
-                decreaseSellIn(item);
-                if (item.sellIn < 0)
-                    increaseItemQuality(item);
-                continue;
-            }
 
-            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                increaseItemQuality(item);
-                if (item.sellIn < 11)
-                    increaseItemQuality(item);
-                if (item.sellIn < 6)
-                    increaseItemQuality(item);
+//            if(item.name.equals("Sulfuras, Hand of Ragnaros"))
+//                continue;
+//
+//            if (item.name.equals("Aged Brie")) {
+//                increaseItemQuality(item);
+//                decreaseSellIn(item);
+//                if (item.sellIn < 0)
+//                    increaseItemQuality(item);
+//                continue;
+//            }
 
-                decreaseSellIn(item);
+          //  if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+//                increaseItemQuality(item);
+//                if (item.sellIn < 11)
+//                    increaseItemQuality(item);
+//                if (item.sellIn < 6)
+//                    increaseItemQuality(item);
+//
+//                decreaseSellIn(item);
+//
+//                if (item.sellIn < 0)
+//                    item.quality = 0;
+//                continue;
+        //    }
 
-                if (item.sellIn < 0)
-                    item.quality = 0;
-                continue;
-            }
-
-            decreaseItemQuality(item);
-            decreaseSellIn(item);
-            if (item.sellIn < 0)
-                decreaseItemQuality(item);
+//            decreaseItemQuality(item);
+//            decreaseSellIn(item);
+//            if (item.sellIn < 0)
+//                decreaseItemQuality(item);
 
         }
     }
