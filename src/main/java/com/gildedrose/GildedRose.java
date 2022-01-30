@@ -12,14 +12,18 @@ class GildedRose {
 
     public static NormalItem convertToNormalItem(Item item)
     {
-        if(item.name.toLowerCase().contains("sulfuras"))
+        String name = item.name.toLowerCase();
+        if(name.contains("sulfuras"))
             return new Sulfuras(item.name, item.sellIn, item.quality);
 
-        if(item.name.toLowerCase().contains("aged brie"))
+        if(name.contains("aged brie"))
             return new AgedBrie(item.name, item.sellIn, item.quality);
 
-        if(item.name.toLowerCase().contains("backstage passes"))
+        if(name.contains("backstage passes"))
             return new BackStagePasses(item.name, item.sellIn, item.quality);
+
+        if(name.contains("conjured"))
+            return new Conjured(item.name, item.sellIn, item.quality);
 
         return new NormalItem(item.name, item.sellIn, item.quality);
     }
@@ -37,36 +41,6 @@ class GildedRose {
             normalItem.updateQuality();
             updateItemByNormalItem(item ,  normalItem   );
 
-
-//            if(item.name.equals("Sulfuras, Hand of Ragnaros"))
-//                continue;
-//
-//            if (item.name.equals("Aged Brie")) {
-//                increaseItemQuality(item);
-//                decreaseSellIn(item);
-//                if (item.sellIn < 0)
-//                    increaseItemQuality(item);
-//                continue;
-//            }
-
-          //  if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-//                increaseItemQuality(item);
-//                if (item.sellIn < 11)
-//                    increaseItemQuality(item);
-//                if (item.sellIn < 6)
-//                    increaseItemQuality(item);
-//
-//                decreaseSellIn(item);
-//
-//                if (item.sellIn < 0)
-//                    item.quality = 0;
-//                continue;
-        //    }
-
-//            decreaseItemQuality(item);
-//            decreaseSellIn(item);
-//            if (item.sellIn < 0)
-//                decreaseItemQuality(item);
 
         }
     }
