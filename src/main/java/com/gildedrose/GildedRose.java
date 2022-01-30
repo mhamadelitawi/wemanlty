@@ -15,6 +15,10 @@ class GildedRose {
             if(item.name.equals("Aged Brie"))
             {
                 increaseItemQuality(item);
+                decreaseSellIn( item);
+                if (item.sellIn < 0)
+                    increaseItemQuality(item);
+
             }
             else
             {
@@ -26,35 +30,29 @@ class GildedRose {
                         increaseItemQuality(item);
                     if (item.sellIn < 6)
                         increaseItemQuality(item);
+
+                    decreaseSellIn( item);
+
+                    if(item.sellIn < 0)
+                        item.quality = 0;
+
                 }
                 else
                 {
                     decreaseItemQuality(item);
 
-                }
+                    decreaseSellIn( item);
 
-
-            }
-
-
-
-
-            decreaseSellIn( item);
-
-
-
-
-            if (item.sellIn < 0) {
-                if (item.name.equals("Aged Brie"))
-                    increaseItemQuality(item);
-                else
-                {
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert"))
-                        item.quality = 0;
-                     else
+                    if (item.sellIn < 0)
                         decreaseItemQuality(item);
+
                 }
+
+
             }
+
+
+
         }
     }
 
